@@ -5,7 +5,7 @@ const IntertwinedLineChart = (props) => {
   const width = props.width || 900;
   const height = props.height || 900;
 
-  const data = props.data || [{}, {}, {}, {}, {}, {}, {}, {}, {}];
+  const data = props.data || [];
 
   const oddFactor = (key) => {
     return Math.round(key / 2) - 0.2 * (Math.round(key / 2) - 1);
@@ -53,7 +53,7 @@ const IntertwinedLineChart = (props) => {
           .attr(
             "d",
             `M${
-              60 + 500 * 1
+              60 + 500 * dataItem.percentageInDecimal
             } 22L35.7214 21.8318C30.2485 21.8318 24.8499 23.0993 19.9489 25.5351L-17.2002 43.9976`
           )
           .attr("stroke", "url(#paint0_linear_2448_53249)")
@@ -64,24 +64,7 @@ const IntertwinedLineChart = (props) => {
           .append("path")
           .attr(
             "d",
-            `M${60 + 500 * 1} 
-            ${102 * oddFactor(key)}L${48 * oddFactor(key)} 
-            ${102 * oddFactor(key)}C${35 * oddFactor(key)} 
-            ${102 * oddFactor(key)} ${23 * oddFactor(key)} 
-            ${95 * oddFactor(key)} 
-            ${16 * oddFactor(key)} 
-            ${85 * oddFactor(key)}L${-37 * oddFactor(key)} 
-            ${23 * oddFactor(key)}`
-          )
-          .attr("stroke", "url(#paint1_linear_2448_53249)")
-          .attr("stroke-width", 32)
-          .attr("stroke-linecap", "square");
-      } else {
-        svg
-          .append("path")
-          .attr(
-            "d",
-            `M${60 + 500 * 1} 
+            `M${60 + 500 * dataItem.percentageInDecimal} 
             ${62 * evenFactor(key)}L${43 * evenFactor(key)}
             ${62 * evenFactor(key)}C${37 * evenFactor(key)}
             ${62 * evenFactor(key)} 
@@ -92,6 +75,23 @@ const IntertwinedLineChart = (props) => {
             ${111 * evenFactor(key)}`
           )
           .attr("stroke", "url(#paint2_linear_2448_53249)")
+          .attr("stroke-width", 32)
+          .attr("stroke-linecap", "square");
+      } else {
+        svg
+          .append("path")
+          .attr(
+            "d",
+            `M${60 + 500 * dataItem.percentageInDecimal} 
+            ${102 * oddFactor(key)}L${48 * oddFactor(key)} 
+            ${102 * oddFactor(key)}C${35 * oddFactor(key)} 
+            ${102 * oddFactor(key)} ${23 * oddFactor(key)} 
+            ${95 * oddFactor(key)} 
+            ${16 * oddFactor(key)} 
+            ${85 * oddFactor(key)}L${-37 * oddFactor(key)} 
+            ${23 * oddFactor(key)}`
+          )
+          .attr("stroke", "url(#paint1_linear_2448_53249)")
           .attr("stroke-width", 32)
           .attr("stroke-linecap", "square");
       }
@@ -107,11 +107,11 @@ const IntertwinedLineChart = (props) => {
           .attr("y", 23)
           .attr("font-size", 10)
           .attr("fill", "#7C8295")
-          .text("Q1");
+          .text(dataItem.label);
 
         svg
           .append("circle")
-          .attr("cx", 60 + 500 * 1)
+          .attr("cx", 60 + 500 * dataItem.percentageInDecimal)
           .attr("cy", 22)
           .attr("r", 11)
           .attr("fill", "white");
@@ -119,11 +119,11 @@ const IntertwinedLineChart = (props) => {
         svg
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("x", 60 + 500 * 1)
+          .attr("x", 60 + 500 * dataItem.percentageInDecimal)
           .attr("y", 23)
           .attr("font-size", 6)
           .attr("fill", "#1A1A1A")
-          .text("0%");
+          .text(`${dataItem.percentageInDecimal * 100}%`);
       } else if (key % 2 === 1) {
         svg
           .append("text")
@@ -132,11 +132,11 @@ const IntertwinedLineChart = (props) => {
           .attr("y", 63 * evenFactor(key))
           .attr("font-size", 10)
           .attr("fill", "#7C8295")
-          .text("Q2");
+          .text(dataItem.label);
 
         svg
           .append("circle")
-          .attr("cx", 60 + 500 * 1)
+          .attr("cx", 60 + 500 * dataItem.percentageInDecimal)
           .attr("cy", 62 * evenFactor(key))
           .attr("r", 11)
           .attr("fill", "white");
@@ -144,11 +144,11 @@ const IntertwinedLineChart = (props) => {
         svg
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("x", 60 + 500 * 1)
+          .attr("x", 60 + 500 * dataItem.percentageInDecimal)
           .attr("y", 63 * evenFactor(key))
           .attr("font-size", 6)
           .attr("fill", "#1A1A1A")
-          .text("25%");
+          .text(`${dataItem.percentageInDecimal * 100}%`);
       } else {
         svg
           .append("text")
@@ -157,11 +157,11 @@ const IntertwinedLineChart = (props) => {
           .attr("y", 103 * oddFactor(key))
           .attr("font-size", 10)
           .attr("fill", "#7C8295")
-          .text("Q3");
+          .text(dataItem.label);
 
         svg
           .append("circle")
-          .attr("cx", 60 + 500 * 1)
+          .attr("cx", 60 + 500 * dataItem.percentageInDecimal)
           .attr("cy", 102 * oddFactor(key))
           .attr("r", 11)
           .attr("fill", "white");
@@ -169,11 +169,11 @@ const IntertwinedLineChart = (props) => {
         svg
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("x", 60 + 500 * 1)
+          .attr("x", 60 + 500 * dataItem.percentageInDecimal)
           .attr("y", 103 * oddFactor(key))
           .attr("font-size", 6)
           .attr("fill", "#1A1A1A")
-          .text("0%");
+          .text(`${dataItem.percentageInDecimal * 100}%`);
       }
     });
 
@@ -223,7 +223,7 @@ const IntertwinedLineChart = (props) => {
       .append("stop")
       .attr("offset", 1)
       .attr("stop-color", "#0400B2");
-  }, []);
+  }, [data]);
 
   return <div id="intertwined-chart"></div>;
 };

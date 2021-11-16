@@ -27,3 +27,10 @@ npm run build && npm start
 # or
 yarn build && yarn start
 ```
+
+## Next Development
+
+* Integrating Intertwined Chart with props so it can be rendered dynamically
+* Make dummy data to render, IN JSON format
+* Make animation
+* Make the widget scalable, following given width and height
