@@ -2,9 +2,6 @@ import { useEffect } from "react";
 import * as d3 from "d3";
 
 const IntertwinedLineChart = (props) => {
-  const width = props.width || 900;
-  const height = props.height || 900;
-
   const data = props.data || [];
 
   const oddFactor = (key) => {
@@ -16,11 +13,17 @@ const IntertwinedLineChart = (props) => {
   };
 
   useEffect(() => {
+    document.getElementById("intertwined-chart").innerHTML = "";
+
     const svg = d3
       .select("#intertwined-chart")
       .append("svg")
-      .attr("width", width)
-      .attr("height", height)
+      .attr("height", "auto")
+      .attr(
+        "viewBox",
+        `0 0 1100 ${300 + 50 * (data.length > 5 ? data.length - 5 : 0)}`
+      )
+      .attr("preserveAspectRatio", "none")
       .attr("fill", "none")
       .attr("xmlns", "http://www.w3.org/2000/svg");
 
@@ -64,7 +67,11 @@ const IntertwinedLineChart = (props) => {
           .append("path")
           .attr(
             "d",
-            `M${60 + 500 * dataItem.percentageInDecimal} 
+            `M${
+              60 +
+              50 * (key > 2 ? key - 2 : 0) +
+              500 * dataItem.percentageInDecimal
+            } 
             ${62 * evenFactor(key)}L${43 * evenFactor(key)}
             ${62 * evenFactor(key)}C${37 * evenFactor(key)}
             ${62 * evenFactor(key)} 
@@ -82,7 +89,11 @@ const IntertwinedLineChart = (props) => {
           .append("path")
           .attr(
             "d",
-            `M${60 + 500 * dataItem.percentageInDecimal} 
+            `M${
+              60 +
+              50 * (key > 2 ? key - 2 : 0) +
+              500 * dataItem.percentageInDecimal
+            } 
             ${102 * oddFactor(key)}L${48 * oddFactor(key)} 
             ${102 * oddFactor(key)}C${35 * oddFactor(key)} 
             ${102 * oddFactor(key)} ${23 * oddFactor(key)} 
@@ -103,7 +114,7 @@ const IntertwinedLineChart = (props) => {
         svg
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("x", 660)
+          .attr("x", 1000)
           .attr("y", 23)
           .attr("font-size", 10)
           .attr("fill", "#7C8295")
@@ -128,7 +139,7 @@ const IntertwinedLineChart = (props) => {
         svg
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("x", 660)
+          .attr("x", 1000)
           .attr("y", 63 * evenFactor(key))
           .attr("font-size", 10)
           .attr("fill", "#7C8295")
@@ -136,7 +147,12 @@ const IntertwinedLineChart = (props) => {
 
         svg
           .append("circle")
-          .attr("cx", 60 + 500 * dataItem.percentageInDecimal)
+          .attr(
+            "cx",
+            60 +
+              50 * (key > 2 ? key - 2 : 0) +
+              500 * dataItem.percentageInDecimal
+          )
           .attr("cy", 62 * evenFactor(key))
           .attr("r", 11)
           .attr("fill", "white");
@@ -144,7 +160,12 @@ const IntertwinedLineChart = (props) => {
         svg
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("x", 60 + 500 * dataItem.percentageInDecimal)
+          .attr(
+            "x",
+            60 +
+              50 * (key > 2 ? key - 2 : 0) +
+              500 * dataItem.percentageInDecimal
+          )
           .attr("y", 63 * evenFactor(key))
           .attr("font-size", 6)
           .attr("fill", "#1A1A1A")
@@ -153,7 +174,7 @@ const IntertwinedLineChart = (props) => {
         svg
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("x", 660)
+          .attr("x", 1000)
           .attr("y", 103 * oddFactor(key))
           .attr("font-size", 10)
           .attr("fill", "#7C8295")
@@ -161,7 +182,12 @@ const IntertwinedLineChart = (props) => {
 
         svg
           .append("circle")
-          .attr("cx", 60 + 500 * dataItem.percentageInDecimal)
+          .attr(
+            "cx",
+            60 +
+              50 * (key > 2 ? key - 2 : 0) +
+              500 * dataItem.percentageInDecimal
+          )
           .attr("cy", 102 * oddFactor(key))
           .attr("r", 11)
           .attr("fill", "white");
@@ -169,7 +195,12 @@ const IntertwinedLineChart = (props) => {
         svg
           .append("text")
           .attr("text-anchor", "middle")
-          .attr("x", 60 + 500 * dataItem.percentageInDecimal)
+          .attr(
+            "x",
+            60 +
+              50 * (key > 2 ? key - 2 : 0) +
+              500 * dataItem.percentageInDecimal
+          )
           .attr("y", 103 * oddFactor(key))
           .attr("font-size", 6)
           .attr("fill", "#1A1A1A")
