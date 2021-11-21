@@ -94,6 +94,7 @@ export default function Home() {
                 variant="standard"
                 label="Percentage In Decimal"
                 fullWidth
+                type="number"
                 value={data[key].percentageInDecimal}
                 onChange={(event) =>
                   handleChange(key, "percentageInDecimal", event.target.value)
