@@ -134,7 +134,7 @@ const IntertwinedLineChart = (props) => {
           .attr("y", 23)
           .attr("font-size", 6)
           .attr("fill", "#1A1A1A")
-          .text(`${dataItem.percentageInDecimal * 100}%`);
+          .text(`${Math.round(dataItem.percentageInDecimal * 100)}%`);
       } else if (key % 2 === 1) {
         svg
           .append("text")
@@ -169,7 +169,7 @@ const IntertwinedLineChart = (props) => {
           .attr("y", 63 * evenFactor(key))
           .attr("font-size", 6)
           .attr("fill", "#1A1A1A")
-          .text(`${dataItem.percentageInDecimal * 100}%`);
+          .text(`${Math.round(dataItem.percentageInDecimal * 100)}%`);
       } else {
         svg
           .append("text")
@@ -204,7 +204,7 @@ const IntertwinedLineChart = (props) => {
           .attr("y", 103 * oddFactor(key))
           .attr("font-size", 6)
           .attr("fill", "#1A1A1A")
-          .text(`${dataItem.percentageInDecimal * 100}%`);
+          .text(`${Math.round(dataItem.percentageInDecimal * 100)}%`);
       }
     });
 
